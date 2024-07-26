@@ -1,0 +1,65 @@
+width: 0.185
+
+size: [66, 60]
+
+# +X: right, +Y: up, +Z: back
+#spawn_pos: [0, 0, 0]
+
+elements:
+  # background panel
+  - type: Panel
+    rect: [0, 0, 66, 60]
+    corner_radius: 4
+    bg_color: "#24273a"
+
+  # volume buttons
+  - type: Button
+    rect: [2, 0, 20, 20]
+    corner_radius: 4
+    font_size: 12
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "Pa"
+    click_down:
+      - type: Exec
+        command: [ "pavucontrol" ]
+  - type: Button
+    rect: [23, 0, 20, 20]
+    corner_radius: 4
+    font_size: 12
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "M"
+    click_down:
+      - type: Exec
+        command: [ "mate-volume-control" ]
+  - type: Button
+    rect: [44, 0, 20, 20]
+    corner_radius: 4
+    font_size: 12
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "Cr"
+    click_down:
+      - type: Exec
+        command: [ "carla" ]
+  - type: Button
+    rect: [2, 22, 20, 20]
+    corner_radius: 4
+    font_size: 12
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "H"
+    click_down:
+      - type: Exec
+        command: [ "helvum" ]
+  - type: Button
+    rect: [23, 22, 20, 20]
+    corner_radius: 4
+    font_size: 12
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "Qp"
+    click_down:
+      - type: Exec
+        command: [ "qpwgraph" ]
