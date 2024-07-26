@@ -3,7 +3,7 @@ This is a wlx-overlay modification created by EliteAlien. This modification is f
 
 ## What you need installed to use all features
 1) playerctl - Must be installed for media player buttons/controls to tap into mpris player functions & to collect the metadata information if using "player.yaml".
-2) swayosd (optional) - This is currently not fully working. Though the mute options and toggles can be used. You just can't use the over 100%. wlx-overlay will not register the "--max-volume 153"
+2) swayosd (optional) - You will need to uncomment the "swayosd" commands under watch.yaml & add the comment to the pactl the same way as swayosd was.
 3) PulseAudio or Pipewire-Pulse. This is used to control the audio alternatively from the swayosd.
 
 ## How to install
