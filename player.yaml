@@ -62,3 +62,65 @@ elements:
 #    source: Exec
 #    command: ["playerctl", "--all-players", "metadata", "mpris:artUrl"]
 #    interval: 0.5
+
+  # Media buttons
+  - type: Button
+    rect: [210, 282, 50, 60]
+    corner_radius: 4
+    font_size: 28
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "⬅"
+    click_down:
+      - type: Exec
+        command: [ "playerctl", "--all-players", "position", "5-" ]
+  - type: Button
+    rect: [261, 282, 50, 60]
+    corner_radius: 4
+    font_size: 28
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "⏮"
+    click_down:
+      - type: Exec
+        command: [ "playerctl", "--all-players", "previous" ]
+  - type: Button
+    rect: [312, 282, 50, 60]
+    corner_radius: 4
+    font_size: 30
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "⏯"
+    click_down:
+      - type: Exec
+        command: [ "playerctl", "--all-players", "play-pause" ]
+  - type: Button
+    rect: [363, 282, 50, 60]
+    corner_radius: 4
+    font_size: 28
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "⏹"
+    click_down:
+      - type: Exec
+        command: [ "playerctl", "--all-players", "stop" ]
+  - type: Button
+    rect: [414, 282, 50, 60]
+    corner_radius: 4
+    font_size: 28
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "⏭"
+    click_down:
+      - type: Exec
+        command: [ "playerctl", "--all-players", "next" ]
+  - type: Button
+    rect: [465, 282, 50, 60]
+    corner_radius: 4
+    font_size: 28
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "➡"
+    click_down:
+      - type: Exec
+        command: [ "playerctl", "--all-players", "position", "5+" ]
