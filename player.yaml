@@ -1,0 +1,64 @@
+width: 0.185
+
+size: [800, 400]
+
+elements:
+  # background panel
+  - type: Panel
+    rect: [0, 0, 800, 400]
+    corner_radius: 4
+    bg_color: "#24273a"
+
+  # Media Info
+  - type: Label
+    rect: [2, 40, 50, 60]
+    font_size: 40
+    fg_color: "#ffffff"
+    source: Static
+    text: "Artist:"
+
+  - type: Label
+    rect: [155, 40, 50, 60]
+    font_size: 40
+    fg_color: "#ffffff"
+    source: Exec
+    command: ["playerctl", "--all-players", "metadata", "artist"]
+    interval: 0.5
+
+  - type: Label
+    rect: [2, 90, 50, 60]
+    font_size: 40
+    fg_color: "#ffffff"
+    source: Static
+    text: "Title:"
+
+  - type: Label
+    rect: [130, 90, 50, 60]
+    font_size: 40
+    fg_color: "#ffffff"
+    source: Exec
+    command: ["playerctl", "--all-players", "metadata", "title"]
+    interval: 0.5
+
+  - type: Label
+    rect: [2, 140, 50, 60]
+    font_size: 40
+    fg_color: "#ffffff"
+    source: Static
+    text: "Album:"
+
+  - type: Label
+    rect: [180, 140, 50, 60]
+    font_size: 40
+    fg_color: "#ffffff"
+    source: Exec
+    command: ["playerctl", "--all-players", "metadata", "album"]
+    interval: 0.5
+
+#  - type: Label
+#    rect: [25, 8, 50, 60]
+#    font_size: 12
+#    fg_color: "#ffffff"
+#    source: Exec
+#    command: ["playerctl", "--all-players", "metadata", "mpris:artUrl"]
+#    interval: 0.5
