@@ -1,0 +1,494 @@
+# looking to make changes? 
+# drop me in ~/.config/wlxoverlay/watch.yaml
+#
+
+width: 0.185
+
+size: [800, 400]
+
+elements:
+  # background panel
+  - type: Panel
+    rect: [0, 0, 800, 400]
+    corner_radius: 4
+    bg_color: "#24273a"
+
+#----- Local Clock ------
+  # local day-of-week
+  - type: Label
+    rect: [2, 24, 200, 50]
+    corner_radius: 4
+    font_size: 18
+    fg_color: "#8bd5ca"
+    source: Clock
+    format: "%A %x" # Tuesday
+    #format: "%a" # Tue
+
+  # local clock
+  - type: Label
+    rect: [19, 60, 200, 50]
+    corner_radius: 4
+    font_size: 24 # Use 32 for 12-hour time
+    fg_color: "#8bd5ca"
+    source: Clock
+    #format: "%H:%M" # 23:59
+    format: "%I:%M %p" # 11:59 PM
+
+#----- Volume Controls ------
+
+  # volume buttons
+  - type: Button
+    rect: [4, 80, 50, 60]
+    corner_radius: 4
+    font_size: 24
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "🔊"
+    click_down:
+      - type: Exec
+        #command: [ "swayosd-client", "--output-volume=5", "--max-volume 153" ]
+        command: [ "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%" ]
+      - type: Toast
+        message: Speaker volume raised!
+  - type: Button
+    rect: [55, 80, 50, 60]
+    corner_radius: 4
+    font_size: 26
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "🔉"
+    click_down:
+      - type: Exec
+        #command: [ "swayosd-client", "--output-volume=-5", "--max-volume 153" ]
+        command: [ "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%" ]
+      - type: Toast
+        message: Speaker volume lowered!
+  - type: Button
+    rect: [106, 80, 50, 60]
+    corner_radius: 4
+    font_size: 26
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "🔇"
+    click_down:
+      - type: Exec
+        #command: [ "swayosd-client", "--output-volume=mute-toggle" ]
+        command: [ "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle" ]
+      - type: Toast
+        message: Speaker mute toggled!
+  - type: Button
+    rect: [157, 80, 50, 60]
+    corner_radius: 4
+    font_size: 26
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "🎧"
+    click_down:
+      - type: Window
+        target: mixers
+        action: ShowUi
+      - type: Window 
+        target: mixers
+        action: Destroy # only triggers if exists since before current frame
+
+  # Mic volume buttons
+  - type: Button
+    rect: [4, 146, 50, 60]
+    corner_radius: 4
+    font_size: 20
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "📞+"
+    click_down:
+      - type: Exec
+        #command: [ "swayosd-client", "--input-volume=5", "--max-volume 153" ]
+        command: [ "pactl", "set-source-volume", "@DEFAULT_SOURCE@", "+5%" ]
+      - type: Toast
+        message: Mic volume raised!
+  - type: Button
+    rect: [55, 146, 50, 60]
+    corner_radius: 4
+    font_size: 20
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "📞-"
+    click_down:
+      - type: Exec
+        #command: [ "swayosd-client", "--input-volume=-5", "--max-volume 153" ]
+        command: [ "pactl", "set-source-volume", "@DEFAULT_SOURCE@", "-5%" ]
+      - type: Toast
+        message: Mic volume lowered!
+  - type: Button
+    rect: [106, 146, 50, 60]
+    corner_radius: 4
+    font_size: 28
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "✆"
+    click_down:
+      - type: Exec
+        #command: [ "swayosd-client", "--input-volume=mute-toggle" ]
+        command: [ "pactl", "set-source-mute", "@DEFAULT_SOURCE@", "toggle" ]
+      - type: Toast
+        message: Mic mute toggled!
+
+  # Sweap Watch Hand
+  - type: Button
+    rect: [157, 146, 50, 60]
+    corner_radius: 4
+    font_size: 28
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "⌚"
+    click_down:
+      - type: Watch
+        action: SwitchHands
+
+#----- Status ------
+  # batteries
+  - type: BatteryList
+    rect: [4, 380, 400, 30]
+    corner_radius: 4
+    font_size: 18
+    fg_color: "#8bd5ca"
+    fg_color_low: "#B06060"
+    fg_color_charging: "#6080A0"
+    num_devices: 9
+    layout: Horizontal
+    low_threshold: 33
+
+#----- Configuration Controls ------
+
+  #Configuration button
+  - type: Button
+    rect: [212, 2, 42, 36]
+    corner_radius: 4
+    font_size: 15
+    bg_color: "#c6a0f6"
+    fg_color: "#24273a"
+    text: "⚙"
+    click_up: # destroy if exists, otherwise create
+      - type: Window
+        target: settings
+        action: ShowUi # only triggers if not exists
+      - type: Window
+        target: settings
+        action: Destroy # only triggers if exists since before current frame
+
+  # Fix Floor
+  - type: Button
+    rect: [258, 2, 42, 36]
+    #rect: [330, 1, 220, 30]
+    corner_radius: 6
+    font_size: 18
+    fg_color: "#24273a"
+    bg_color: "#eed49f"
+    text: "ⅎ"
+    click_down:
+      - type: System
+        action: PlayspaceFixFloor
+      - type: Window
+        target: "settings"
+        action: Destroy
+
+  # Fix Offset
+  - type: Button
+    rect: [304, 2, 42, 36]
+    #rect: [330, 1, 220, 30]
+    corner_radius: 6
+    font_size: 18
+    fg_color: "#24273a"
+    bg_color: "#eed49f"
+    text: "☉"
+    click_down:
+      - type: System
+        action: PlayspaceResetOffset
+      - type: Window
+        target: "settings"
+        action: Destroy
+
+  # Keyboard button
+  - type: Button
+    rect: [350, 2, 60, 36]
+    corner_radius: 4
+    font_size: 15
+    fg_color: "#24273a"
+    bg_color: "#a6da95"
+    text: "⌨"
+    click_up:
+      - type: Overlay
+        target: "kbd"
+        action: ToggleVisible
+    long_click_up:
+      - type: Overlay
+        target: "kbd"
+        action: Reset
+    right_up:
+      - type: Overlay
+        target: "kbd"
+        action: ToggleImmovable
+    middle_up:
+      - type: Overlay
+        target: "kbd"
+        action: ToggleInteraction
+    scroll_up:
+      - type: Overlay
+        target: "kbd"
+        action: 
+          Opacity: { delta: 0.025 }
+    scroll_down:
+      - type: Overlay
+        target: "kbd"
+        action: 
+          Opacity: { delta: -0.025 }
+
+  # bottom row, of keyboard + overlays
+  - type: OverlayList
+    rect: [430, 1, 306, 40]
+    corner_radius: 4
+    font_size: 14
+    fg_color: "#cad3f5"
+    bg_color: "#1e2030"
+    layout: Horizontal
+    click_up: ToggleVisible
+    long_click_up: Reset
+    right_up: ToggleImmovable
+    middle_up: ToggleInteraction
+    scroll_up: 
+      Opacity: { delta: 0.025 }
+    scroll_down: 
+      Opacity: { delta: -0.025 }
+ 
+#----- Clocks -------
+  - type: Button
+    rect: [210, 40, 414, 240]
+    corner_radius: 4
+    font_size: 14
+    bg_color: "#4a4a4a"
+    fg_color: "#4a4a4a"
+    text: ""
+  # alt clock 1
+  - type: Label
+    rect: [210, 90, 200, 50]
+    corner_radius: 4
+    font_size: 24 # Use 18 for 12-hour time
+    fg_color: "#b7bdf8"
+    source: Clock
+    timezone: "Europe/London" # change TZ1 here
+    #format: "%H:%M" # 23:59
+    format: "%I:%M %p" # 11:59 PM
+  - type: Label
+    rect: [210, 60, 200, 50]
+    corner_radius: 4
+    font_size: 14
+    fg_color: "#b7bdf8"
+    source: Static
+    text: "London UTC +1" # change TZ1 label here
+
+  # alt clock 2
+  - type: Label
+    rect: [210, 150, 200, 50]
+    corner_radius: 4
+    font_size: 24 # Use 18 for 12-hour time
+    fg_color: "#b7bdf8"
+    source: Clock
+    timezone: "Europe/Paris" # change TZ3 here
+    #format: "%H:%M" # 23:59
+    format: "%I:%M %p" # 11:59 PM
+  - type: Label
+    rect: [210, 120, 200, 50]
+    corner_radius: 4
+    font_size: 14
+    fg_color: "#b7bdf8"
+    source: Static
+    text: "France UTC +2" # change TZ2 label here
+
+  # alt clock 3
+  - type: Label
+    rect: [210, 210, 200, 50]
+    corner_radius: 4
+    font_size: 24 # Use 18 for 12-hour time
+    fg_color: "#b7bdf8"
+    source: Clock
+    timezone: "Europe/Helsinki" # change TZ3 here
+    #format: "%H:%M" # 23:59
+    format: "%I:%M %p" # 11:59 PM
+  - type: Label
+    rect: [210, 180, 200, 50]
+    corner_radius: 4
+    font_size: 14
+    fg_color: "#b7bdf8"
+    source: Static
+    text: "Finland UTC +3" # change TZ3 label here
+
+  # alt clock 4
+  - type: Label
+    rect: [210, 270, 200, 50]
+    corner_radius: 4
+    font_size: 24 # Use 18 for 12-hour time
+    fg_color: "#b7bdf8"
+    source: Clock
+    timezone: "Indian/Mahe" # change TZ4 here
+    #format: "%H:%M" # 23:59
+    format: "%I:%M %p" # 11:59 PM
+  - type: Label
+    rect: [210, 240, 200, 50]
+    corner_radius: 4
+    font_size: 14
+    fg_color: "#b7bdf8"
+    source: Static
+    text: "India UTC +5:30" # change TZ4 label here
+
+ #--- Clocks Second Row ---
+
+  # alt clock 5
+  - type: Label
+    rect: [400, 90, 200, 50]
+    corner_radius: 4
+    font_size: 24 # Use 18 for 12-hour time
+    fg_color: "#b7bdf8"
+    source: Clock
+    timezone: "Asia/Hong_Kong" # change TZ5 here
+    #format: "%H:%M" # 23:59
+    format: "%I:%M %p" # 11:59 PM
+  - type: Label
+    rect: [400, 60, 200, 50]
+    corner_radius: 4
+    font_size: 14
+    fg_color: "#b7bdf8"
+    source: Static
+    text: "China UTC +8" # change TZ5 label here
+
+  # alt clock 6
+  - type: Label
+    rect: [400, 150, 200, 50]
+    corner_radius: 4
+    font_size: 24 # Use 18 for 12-hour time
+    fg_color: "#b7bdf8"
+    source: Clock
+    timezone: "Asia/Tokyo" # change TZ6 here
+    #format: "%H:%M" # 23:59
+    format: "%I:%M %p" # 11:59 PM
+  - type: Label
+    rect: [400, 120, 200, 50]
+    corner_radius: 4
+    font_size: 14
+    fg_color: "#b7bdf8"
+    source: Static
+    text: "Japan UTC +9" # change TZ6 label here
+
+  # alt clock 7
+  - type: Label
+    rect: [400, 210, 200, 50]
+    corner_radius: 4
+    font_size: 24 # Use 18 for 12-hour time
+    fg_color: "#b7bdf8"
+    source: Clock
+    timezone: "Australia/Lord_Howe" # change TZ7 here
+    #format: "%H:%M" # 23:59
+    format: "%I:%M %p" # 11:59 PM
+  - type: Label
+    rect: [400, 180, 200, 50]
+    corner_radius: 4
+    font_size: 14
+    fg_color: "#b7bdf8"
+    source: Static
+    text: "Australia UTC +10:30 (4)" # change TZ7 label here
+
+  # alt clock 8
+  - type: Label
+    rect: [400, 270, 200, 50]
+    corner_radius: 4
+    font_size: 24 # Use 18 for 12-hour time
+    fg_color: "#b7bdf8"
+    source: Clock
+    timezone: "Pacific/Chatham" # change TZ8 here
+    #format: "%H:%M" # 23:59
+    format: "%I:%M %p" # 11:59 PM
+  - type: Label
+    rect: [400, 240, 200, 50]
+    corner_radius: 4
+    font_size: 14
+    fg_color: "#b7bdf8"
+    source: Static
+    text: "New Zeland +12:30 (1)" # change TZ8 label here
+
+#----- Media Controls ------    
+  # Media buttons
+  - type: Button
+    rect: [210, 282, 50, 60]
+    corner_radius: 4
+    font_size: 28
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "⬅"
+    click_down:
+      - type: Exec
+        command: [ "playerctl", "--all-players", "position", "5-" ]
+  - type: Button
+    rect: [261, 282, 50, 60]
+    corner_radius: 4
+    font_size: 28
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "⏮"
+    click_down:
+      - type: Exec
+        command: [ "playerctl", "--all-players", "previous" ]
+  - type: Button
+    rect: [312, 282, 50, 60]
+    corner_radius: 4
+    font_size: 30
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "⏯"
+    click_down:
+      - type: Exec
+        command: [ "playerctl", "--all-players", "play-pause" ]
+  - type: Button
+    rect: [363, 282, 50, 60]
+    corner_radius: 4
+    font_size: 28
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "⏹"
+    click_down:
+      - type: Exec
+        command: [ "playerctl", "--all-players", "stop" ]
+      - type: Window 
+        target: player
+        action: Destroy
+  - type: Button
+    rect: [414, 282, 50, 60]
+    corner_radius: 4
+    font_size: 28
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "⏭"
+    click_down:
+      - type: Exec
+        command: [ "playerctl", "--all-players", "next" ]
+  - type: Button
+    rect: [465, 282, 50, 60]
+    corner_radius: 4
+    font_size: 28
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "➡"
+    click_down:
+      - type: Exec
+        command: [ "playerctl", "--all-players", "position", "5+" ]
+  - type: Button
+    rect: [516, 282, 50, 60]
+    corner_radius: 4
+    font_size: 28
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "♫"
+    click_down:
+      - type: Window
+        target: player
+        action: ShowUi
+      - type: Window 
+        target: player
+        action: Destroy
