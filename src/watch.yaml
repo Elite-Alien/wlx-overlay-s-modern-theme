@@ -46,7 +46,7 @@ elements:
     text: "🔊"
     click_down:
       - type: Exec
-        #command: [ "swayosd-client", "--output-volume=5", "--max-volume 153" ]
+        #command: [ "bash", "-c", "swayosd-client --output-volume=5 --max-volume 153" ]
         command: [ "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%" ]
       - type: Toast
         message: Speaker volume raised!
@@ -59,7 +59,7 @@ elements:
     text: "🔉"
     click_down:
       - type: Exec
-        #command: [ "swayosd-client", "--output-volume=-5", "--max-volume 153" ]
+        #command: [ "bash", "-c", "swayosd-client --output-volume=-5 --max-volume 153" ]
         command: [ "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%" ]
       - type: Toast
         message: Speaker volume lowered!
@@ -101,7 +101,7 @@ elements:
     text: "📞+"
     click_down:
       - type: Exec
-        #command: [ "swayosd-client", "--input-volume=5", "--max-volume 153" ]
+        #command: [ "bash", "-c", "swayosd-client --input-volume=5 --max-volume 153" ]
         command: [ "pactl", "set-source-volume", "@DEFAULT_SOURCE@", "+5%" ]
       - type: Toast
         message: Mic volume raised!
@@ -114,7 +114,7 @@ elements:
     text: "📞-"
     click_down:
       - type: Exec
-        #command: [ "swayosd-client", "--input-volume=-5", "--max-volume 153" ]
+        #command: [ "bash", "-c", "swayosd-client --input-volume=-5 --max-volume 153" ]      
         command: [ "pactl", "set-source-volume", "@DEFAULT_SOURCE@", "-5%" ]
       - type: Toast
         message: Mic volume lowered!
