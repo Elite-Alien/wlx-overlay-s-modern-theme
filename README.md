@@ -1,6 +1,8 @@
 # Please Read
 This is a wlx-overlay modification created by EliteAlien. This modification is free for anyone to use and modify. All I ask in return is, if you create anything, please share as I have shared to you. If you have any requests I can potentially add them within the limitations of this software. As wlx-overlay expands, adds new features, et cetera their could be many modifications to come.
 
+![image](https://github.com/user-attachments/assets/9121c6ad-c3e1-45d8-aedf-025bd3477f0e)
+
 ## What you need installed to use all features
 1) playerctl - Must be installed for media player buttons/controls to tap into mpris player functions & to collect the metadata information if using "player.yaml".
 2) swayosd (optional) - You will need to uncomment the "swayosd" commands under watch.yaml & add the comment to the pactl the same way as swayosd was.
