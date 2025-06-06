@@ -46,8 +46,8 @@ elements:
     text: "🔊"
     click_down:
       - type: Exec
-        #command: [ "bash", "-c", "swayosd-client --output-volume=5 --max-volume 153" ]
-        command: [ "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%" ]
+        command: [ "bash", "-c", "swayosd-client --output-volume 5 --max-volume 153" ]
+        #command: [ "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%" ]
       - type: Toast
         message: Speaker volume raised!
   - type: Button
@@ -59,8 +59,8 @@ elements:
     text: "🔉"
     click_down:
       - type: Exec
-        #command: [ "bash", "-c", "swayosd-client --output-volume=-5 --max-volume 153" ]
-        command: [ "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%" ]
+        command: [ "bash", "-c", "swayosd-client --output-volume -5 --max-volume 153" ]
+        #command: [ "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%" ]
       - type: Toast
         message: Speaker volume lowered!
   - type: Button
@@ -72,8 +72,8 @@ elements:
     text: "🔇"
     click_down:
       - type: Exec
-        #command: [ "swayosd-client", "--output-volume=mute-toggle" ]
-        command: [ "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle" ]
+        command: [ "swayosd-client", "--output-volume=mute-toggle" ]
+        #command: [ "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle" ]
       - type: Toast
         message: Speaker mute toggled!
   - type: Button
@@ -101,7 +101,7 @@ elements:
     text: "📞+"
     click_down:
       - type: Exec
-        #command: [ "bash", "-c", "swayosd-client --input-volume=5 --max-volume 153" ]
+        #command: [ "bash", "-c", "swayosd-client --input-volume 5 --max-volume 153" ]
         command: [ "pactl", "set-source-volume", "@DEFAULT_SOURCE@", "+5%" ]
       - type: Toast
         message: Mic volume raised!
@@ -114,8 +114,8 @@ elements:
     text: "📞-"
     click_down:
       - type: Exec
-        #command: [ "bash", "-c", "swayosd-client --input-volume=-5 --max-volume 153" ]      
-        command: [ "pactl", "set-source-volume", "@DEFAULT_SOURCE@", "-5%" ]
+        command: [ "bash", "-c", "swayosd-client --input-volume -5 --max-volume 153" ]
+        #command: [ "pactl", "set-source-volume", "@DEFAULT_SOURCE@", "-5%" ]
       - type: Toast
         message: Mic volume lowered!
   - type: Button
@@ -127,8 +127,8 @@ elements:
     text: "✆"
     click_down:
       - type: Exec
-        #command: [ "swayosd-client", "--input-volume=mute-toggle" ]
-        command: [ "pactl", "set-source-mute", "@DEFAULT_SOURCE@", "toggle" ]
+        command: [ "swayosd-client", "--input-volume=mute-toggle" ]
+        #command: [ "pactl", "set-source-mute", "@DEFAULT_SOURCE@", "toggle" ]
       - type: Toast
         message: Mic mute toggled!
 
@@ -143,6 +143,18 @@ elements:
     click_down:
       - type: Watch
         action: SwitchHands
+
+  # Dashboard toggle button
+  - type: Button
+    rect: [4, 212, 50, 60]
+    corner_radius: 4
+    font_size: 24
+    fg_color: "#cad3f5"
+    bg_color: "#5b6078"
+    text: "✇"
+    click_up:
+      - type: WayVR
+        action: ToggleDashboard
 
 #----- Status ------
   # batteries
@@ -178,7 +190,6 @@ elements:
   # Fix Floor
   - type: Button
     rect: [258, 2, 42, 36]
-    #rect: [330, 1, 220, 30]
     corner_radius: 6
     font_size: 18
     fg_color: "#24273a"
@@ -194,7 +205,6 @@ elements:
   # Fix Offset
   - type: Button
     rect: [304, 2, 42, 36]
-    #rect: [330, 1, 220, 30]
     corner_radius: 6
     font_size: 18
     fg_color: "#24273a"
@@ -259,6 +269,21 @@ elements:
     scroll_down: 
       Opacity: { delta: -0.025 }
  
+  - type: WayVRLauncher
+    rect: [0, 200, 400, 36]
+    corner_radius: 4
+    font_size: 15
+    fg_color: "#24273a"
+    bg_color: "#e590c4"
+    catalog_name: "default_catalog"
+
+  - type: WayVRDisplayList
+    rect: [0, 236, 400, 36]
+    corner_radius: 4
+    font_size: 15
+    fg_color: "#24273a"
+    bg_color: "#ca68a4"
+
 #----- Clocks -------
   - type: Button
     rect: [210, 40, 414, 240]
@@ -491,4 +516,20 @@ elements:
         action: ShowUi
       - type: Window 
         target: player
+        action: Destroy
+
+# Open Overlay
+  - type: Button
+    rect: [567, 282, 50, 60]
+    corner_radius: 4
+    font_size: 15
+    bg_color: "#c6a0f6"
+    fg_color: "#24273a"
+    text: "⚙"
+    click_down:
+      - type: Window
+        target: submenu1
+        action: ShowUi
+      - type: Window 
+        target: submenu1
         action: Destroy
