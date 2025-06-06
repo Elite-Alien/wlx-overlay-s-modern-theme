@@ -15,10 +15,12 @@ This is a wlx-overlay modification created by EliteAlien. This modification is f
 4) Reload wlx-overlay and/or Steamvr or Monado.
 5) Enjoy.
 
-## Optional Yaml Requirements
+## Optional Yaml Requirements & Modifications
 1) If you do not wish to use mixers.yaml it can be removed, but you will need to modify the button with headphones on it. Either change it to something else or remove it completely.
 2) If you wish to keep mixers.yaml, you may want to modify the mixers included in the mixers.yaml file. The buttons have, "pavucontrol", "mate-volume-control", "carla", "helvum", & "qpwgraph" out of the box.
 3) If you do not wish to use player.yaml it can be removed, but you will need to modify the stop button and music-note button. Either change the music-note button to something else of remove it. As for the stop button, it has a command to close the player.yaml window that should be removed if not used.
 4) When using the mixers.yaml. Aim at one of your desktops with one controller and press the buttons with the other, if your windows are setup to open where the mouse is located. Otherwise it should open where you have defined the Windows logic.
+5) WayVR Dashboard can be used or removed. If you do not have WayVR installed or just do not wish you use it, remove the three entries for it in the watch.yaml. You can search the comments, "# Dashboard toggle button", "# bottom row, of keyboard + overlays". You will find WayVR, WayVRLauncher, & WayVRDisplayList under these comments. Remove or comment all three out.
+6) 12-Hour clock is used by default. You can change this if you wish. Find the comment "#----- Clocks -------" and each clock has a commented out "format". Remove the "#" and add one to the other "format". Then you will be using a 24 hour clock.
 
 I created this out of pure desire to have a much clearner experience then what you get out of the box. I hope you enjoy this modification and please do share any modifications you have done, for all of us to enjoy.
