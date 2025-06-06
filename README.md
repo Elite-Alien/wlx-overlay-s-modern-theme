@@ -7,6 +7,7 @@ This is a wlx-overlay modification created by EliteAlien. This modification is f
 1) playerctl - Must be installed for media player buttons/controls to tap into mpris player functions & to collect the metadata information if using "player.yaml".
 2) swayosd (optional) - You will need to uncomment the "swayosd" commands under watch.yaml & add the comment to the pactl the same way as swayosd was.
 3) PulseAudio or Pipewire-Pulse. This is used to control the audio alternatively from the swayosd.
+4) WayVR (optional) - You will need to install WayVR from your packagemanager or build it. Then add the "wayvr.yaml" to your wlxoverlay config folder in order to use WayVR's Dashboard.
 
 ## How to install
 1) Navigate to ~/.config/wlxoverlay
